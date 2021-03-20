@@ -1,4 +1,13 @@
 /**
+ * @see {SpotifyApi.ExternalUrlObject}
+ */
+export const ExternalUrlsObject = `
+  type ExternalUrlObject {
+    spotify: String!
+  }
+`
+
+/**
  * @see {SpotifyApi.ImageObject}
  */
 export const ImageObject = `
