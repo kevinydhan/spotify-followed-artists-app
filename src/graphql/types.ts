@@ -2,21 +2,21 @@
  * @see {SpotifyApi.ImageObject}
  */
 export const ImageObject = `
- type ImageObject {
-   url: String!
-   width: Int
-   height: Int
- }
+  type ImageObject {
+    url: String!
+    width: Int
+    height: Int
+  }
 `
 
 /**
  * @see {SpotifyApi.FollowersObject}
  */
 export const FollowersObject = `
- type FollowersObject {
-   href: String
-   total: Int!
- }
+  type FollowersObject {
+    href: String
+    total: Int!
+  }
 `
 
 /**
@@ -24,10 +24,13 @@ export const FollowersObject = `
  */
 export const ArtistObjectFull = `
  type ArtistObjectFull {
-   followers: FollowersObject!
-   genres: [String!]!
-   images: [ImageObject!]!
-   popularity: Int!
+    type: String!
+    id: String!
+    name: String!
+    followers: FollowersObject!
+    genres: [String!]!
+    images: [ImageObject!]!
+    popularity: Int!
  }
 `
 
