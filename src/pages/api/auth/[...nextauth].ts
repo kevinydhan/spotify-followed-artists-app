@@ -68,7 +68,13 @@ const options = {
     Providers.Spotify({
       clientId: process.env.SPOTIFY_CLIENT_ID,
       clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
-      scope: ['playlist-read-private', 'playlist-read-collaborative'].join(' '),
+      scope: [
+        /**
+         * This scope is required for:
+         * - Getting user's followed artists
+         */
+        'user-follow-read',
+      ].join(' '),
     }),
   ],
   jwt: {
