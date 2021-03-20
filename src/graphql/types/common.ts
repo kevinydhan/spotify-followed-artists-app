@@ -8,6 +8,15 @@ export const ExternalUrlsObject = `
 `
 
 /**
+ * @see {SpotifyApi.RestrictionsObject}
+ */
+export const RestrictionObject = `
+  type RestrictionsObject {
+    reason: String!
+  }
+`
+
+/**
  * @see {SpotifyApi.ImageObject}
  */
 export const ImageObject = `

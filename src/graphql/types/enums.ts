@@ -24,3 +24,11 @@ export const AlbumType = `
     compilation
   }
 `
+
+export const ReleaseDatePrecision = `
+  enum ReleaseDatePrecision {
+    year
+    month
+    day
+  }
+`
