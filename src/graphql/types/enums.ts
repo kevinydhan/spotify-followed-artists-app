@@ -1,3 +1,13 @@
+export const ContextObjectType = `
+  enum ContextObjectType {
+    artist
+    playlist
+    album
+    show
+    episode
+  }
+`
+
 export const ArtistAlbumGroup = `
   enum ArtistAlbumGroup {
     album
