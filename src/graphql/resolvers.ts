@@ -22,9 +22,16 @@ const resolveArtistAlbumsQuery: FieldResolver<{
   return getAllArtistAlbums(artistId)
 }
 
+const resolveAlbumTracksQuery: FieldResolver<{
+  albumId: string
+}> = (parent) => {
+  return []
+}
+
 export default {
   Query: {
     followingArtists: resolveFollowingArtistsQuery,
     artistAlbums: resolveArtistAlbumsQuery,
+    albumTracks: resolveAlbumTracksQuery,
   },
 }

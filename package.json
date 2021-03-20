@@ -1,5 +1,5 @@
 {
-  "name": "spotify-following-artists-app",
+  "name": "spotify-followed-artists-app",
   "description": "Web application where you can manage your followed artists on Spotify",
   "private": true,
   "author": "Kevin Han <kevinhanyd@gmail.com>",
