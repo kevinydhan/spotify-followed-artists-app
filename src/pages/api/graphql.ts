@@ -1,8 +1,8 @@
-import { ApolloServer, AuthenticationError, gql } from 'apollo-server-micro'
+import { ApolloServer, AuthenticationError } from 'apollo-server-micro'
 import { getSession } from 'next-auth/client'
 
 import resolvers from '@/graphql/resolvers'
-import * as types from '@/graphql/types'
+import typeDefs from '@/graphql/types'
 import spotify from '@/modules/spotify'
 
 /**
@@ -19,7 +19,7 @@ export const config = {
 
 const apolloServer = new ApolloServer({
   resolvers,
-  typeDefs: gql(Object.values(types).join('')),
+  typeDefs,
   context: async ({ req }) => {
     const session = await getSession({ req })
     if (!session?.accessToken) {
