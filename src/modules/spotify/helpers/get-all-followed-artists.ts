@@ -1,13 +1,18 @@
-import SpotifyWebApi from 'spotify-web-api-node'
+import type SpotifyWebApi from 'spotify-web-api-node'
 
-const spotify = new SpotifyWebApi({
-  clientId: process.env.SPOTIFY_CLIENT_ID,
-  clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
-})
+import spotify from '../api'
 
-export const getAllFollowedArtists = async (
-  options: Parameters<SpotifyWebApi['getFollowedArtists']>[0] = { limit: 50 }
-): Promise<SpotifyApi.ArtistObjectFull[]> => {
+export type GetAllFollowedArtists = (
+  ...args: Parameters<SpotifyWebApi['getFollowedArtists']>
+) => Promise<SpotifyApi.ArtistObjectFull[]>
+
+const defaultOptions = {
+  limit: 50,
+}
+
+const getAllFollowedArtists: GetAllFollowedArtists = async (
+  options = defaultOptions
+) => {
   const followedArtists: SpotifyApi.ArtistObjectFull[] = []
   let response = await spotify.getFollowedArtists(options)
 
@@ -29,4 +34,4 @@ export const getAllFollowedArtists = async (
   return followedArtists
 }
 
-export default spotify
+export default getAllFollowedArtists
