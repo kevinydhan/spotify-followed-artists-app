@@ -1,6 +1,6 @@
 import type SpotifyWebApi from 'spotify-web-api-node'
 
-import spotify from '../api'
+import spotify, { limiter } from '../api'
 
 export type GetAllFollowedArtists = (
   ...args: Parameters<SpotifyWebApi['getFollowedArtists']>

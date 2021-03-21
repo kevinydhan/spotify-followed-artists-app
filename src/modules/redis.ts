@@ -13,6 +13,9 @@ const get: typeof getAsync = getAsync.bind(client)
 const setAsync = promisify(client.set)
 const set: typeof setAsync = setAsync.bind(client)
 
+const hmsetAsync = promisify(client.hmset)
+const hmset: typeof hmsetAsync = hmsetAsync.bind(client)
+
 const setexAsync = promisify(client.setex)
 const setex: typeof setexAsync = setexAsync.bind(client)
 
@@ -36,6 +39,7 @@ export default {
   set,
   setex,
   mset,
+  hmset,
   quit,
   flushdb,
 }

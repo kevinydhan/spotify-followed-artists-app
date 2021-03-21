@@ -3,7 +3,7 @@ import 'isomorphic-fetch'
 import { NextApiHandler } from 'next'
 import { getSession } from 'next-auth/client'
 
-import ServerDataController from '@/controllers/ServerDataController'
+import { getAllFollowedArtistsAlbums } from '@/controllers/ServerDataController'
 import spotify from '@/modules/spotify'
 
 const handleRequest: NextApiHandler = async (req, res) => {
@@ -11,9 +11,9 @@ const handleRequest: NextApiHandler = async (req, res) => {
   if (!session?.accessToken) res.status(401).send({})
   spotify.setAccessToken(session.accessToken)
 
-  await ServerDataController.getAllFollowedArtistsAlbums()
+  const artistAlbums = await getAllFollowedArtistsAlbums()
 
-  res.send({ hi: session })
+  res.send({ artistAlbums })
 }
 
 export default handleRequest
