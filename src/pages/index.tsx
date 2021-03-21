@@ -11,7 +11,7 @@ interface IndexPageProps {
 }
 
 const IndexPage: NextPage<IndexPageProps> = () => {
-  const { loading, error, data } = useQuery<QueryData>(QUERY)
+  const { loading, data } = useQuery<QueryData>(QUERY)
 
   if (loading) return <div>Loading...</div>
   return (
