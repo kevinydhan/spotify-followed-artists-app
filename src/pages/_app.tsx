@@ -3,6 +3,8 @@ import type { NextComponentType, NextPage, NextPageContext } from 'next'
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
 
+import client from '@/graphql/client'
+
 interface ModifiedAppProps<CommonPageProps = Record<string, never>>
   extends Omit<AppProps, 'Component' | 'pageProps'> {
   pageProps: CommonPageProps
@@ -14,7 +16,7 @@ interface ModifiedAppProps<CommonPageProps = Record<string, never>>
 }
 
 const App: NextPage<ModifiedAppProps> = ({ Component, pageProps }) => (
-  <>
+  <ApolloProvider client={client}>
     <Head>
       <title>Spotify Followed Artists App</title>
       <meta charSet="UTF-8" />
@@ -24,7 +26,7 @@ const App: NextPage<ModifiedAppProps> = ({ Component, pageProps }) => (
     <main>
       <Component {...pageProps} />
     </main>
-  </>
+  </ApolloProvider>
 )
 
 export default App
