@@ -12,7 +12,7 @@ type FieldResolver<Arguments = Record<string, never>> = IFieldResolver<
   Arguments
 >
 
-const resolveFollowingArtistsQuery: FieldResolver = () => {
+const resolveFollowedArtistsQuery: FieldResolver = () => {
   return getAllFollowedArtists()
 }
 
@@ -30,8 +30,8 @@ const resolveAlbumTracksQuery: FieldResolver<{
 
 export default {
   Query: {
-    followingArtists: resolveFollowingArtistsQuery,
+    followedArtists: resolveFollowedArtistsQuery,
     artistAlbums: resolveArtistAlbumsQuery,
-    albumTracks: resolveAlbumTracksQuery,
+    // albumTracks: resolveAlbumTracksQuery,
   },
 }

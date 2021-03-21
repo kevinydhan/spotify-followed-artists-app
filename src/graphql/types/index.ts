@@ -4,7 +4,7 @@ import * as enums from './enums'
 
 export default `
   type Query {
-    followingArtists: [ArtistObjectFull!]!
+    followedArtists: [ArtistObjectFull!]!
     artistAlbums(artistId: String!): [ArtistAlbumSimplified!]!
   }
 

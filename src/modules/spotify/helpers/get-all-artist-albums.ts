@@ -15,7 +15,6 @@ const getAllArtistAlbums: GetAllArtistAlbums = async (
   artistId,
   options = defaultOptions
 ) => {
-  console.log(artistId)
   const followedArtists: SpotifyApi.AlbumObjectSimplified[] = []
   const response = await spotify.getArtistAlbums(artistId, options)
 
