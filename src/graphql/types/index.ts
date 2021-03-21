@@ -6,6 +6,7 @@ export default `
   type Query {
     followedArtists: [ArtistObjectFull!]!
     artistAlbums(artistId: String!): [ArtistAlbumSimplified!]!
+    followedArtistsAlbums: [ArtistAlbumSimplified!]!
   }
 
   ${Object.values(commonTypes)}

@@ -31,7 +31,6 @@ const getAllFollowedArtists: GetAllFollowedArtists = async (
   }
 
   followedArtists.push(...response.body.artists.items)
-  console.log(followedArtists[0])
   return followedArtists
 }
 

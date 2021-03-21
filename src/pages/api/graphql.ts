@@ -20,12 +20,13 @@ export const config = {
 const apolloServer = new ApolloServer({
   resolvers,
   typeDefs,
-  context: async ({ req }) => {
-    const session = await getSession({ req })
+  context: async (context) => {
+    const session = await getSession(context)
     if (!session?.accessToken) {
       throw new AuthenticationError('You must be signed in')
     }
-    return spotify.setAccessToken(session.accessToken)
+    spotify.setAccessToken(session.accessToken)
+    return context
   },
   playground: {
     settings: {

@@ -1,6 +1,6 @@
 import type SpotifyWebApi from 'spotify-web-api-node'
 
-import spotify from '../api'
+import spotify, { limiter } from '../api'
 
 export type GetAllArtistAlbums = (
   ...args: Parameters<SpotifyWebApi['getArtistAlbums']>
@@ -15,25 +15,34 @@ const getAllArtistAlbums: GetAllArtistAlbums = async (
   artistId,
   options = defaultOptions
 ) => {
-  const followedArtists: SpotifyApi.AlbumObjectSimplified[] = []
-  const response = await spotify.getArtistAlbums(artistId, options)
+  const artistAlbums: SpotifyApi.AlbumObjectSimplified[] = []
+  const response = await limiter.schedule(() => {
+    return spotify.getArtistAlbums(artistId, options)
+  })
+  artistAlbums.push(...response.body.items)
 
-  // while (response.body.next) {
-  //   followedArtists.push(...response.body.items)
-  //   response = await spotify.getArtistAlbums({
-  //     /**
-  //      * Linting for the `after` property was disabled because it was typed as
-  //      * a `number` instead of a `string`.
-  //      */
-  //     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  //     // @ts-ignore
-  //     after: response.body.artists.cursors.after,
-  //     limit: response.body.artists.limit,
-  //   })
-  // }
+  if (response.body.next) {
+    const responses = await limiter.schedule(() => {
+      const { offset, limit, total } = response.body
+      const tasks: ReturnType<SpotifyWebApi['getArtistAlbums']>[] = []
+      let newTask: ReturnType<SpotifyWebApi['getArtistAlbums']>
+      let taskOptions: Parameters<GetAllArtistAlbums>[1]
 
-  followedArtists.push(...response.body.items)
-  return followedArtists
+      for (let next = offset; next < total; next += limit) {
+        taskOptions = { ...options, limit, offset: next }
+        newTask = spotify.getArtistAlbums(artistId, taskOptions)
+        tasks.push(newTask)
+      }
+
+      return Promise.all(tasks)
+    })
+
+    responses.forEach((response) => {
+      artistAlbums.push(...response.body.items)
+    })
+  }
+
+  return artistAlbums
 }
 
 export default getAllArtistAlbums
