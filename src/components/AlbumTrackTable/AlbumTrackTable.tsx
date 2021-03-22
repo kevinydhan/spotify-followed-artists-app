@@ -19,7 +19,8 @@ const AlbumTrackTable: FunctionComponent<Props> = ({ albumId }) => {
 
   const handleButtonClick = (trackUri: string) => async () => {
     try {
-      await fetch(`api/playback/play?trackUri=${trackUri}`)
+      await fetch(`api/playback/queue/${trackUri}`)
+      await fetch(`api/playback/skip`)
     } catch {
       setErrorMessage('Unable to play track')
     }
