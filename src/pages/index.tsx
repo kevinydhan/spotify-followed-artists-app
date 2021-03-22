@@ -17,7 +17,11 @@ const IndexPage: NextPage<IndexPageProps> = () => {
   return (
     <ul>
       {data.followedArtistsAlbums.map((album) => {
-        return <li key={album.id}>{album.name}</li>
+        return (
+          <li key={album.id}>
+            <button>{album.name}</button>
+          </li>
+        )
       })}
     </ul>
   )
