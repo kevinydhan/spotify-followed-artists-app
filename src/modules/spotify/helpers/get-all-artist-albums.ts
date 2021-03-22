@@ -23,13 +23,13 @@ const getAllArtistAlbums: GetAllArtistAlbums = async (
 
   if (response.body.next) {
     const responses = await limiter.schedule(() => {
-      const { offset, limit, total } = response.body
+      const { limit, total } = response.body
       const tasks: ReturnType<SpotifyWebApi['getArtistAlbums']>[] = []
       let newTask: ReturnType<SpotifyWebApi['getArtistAlbums']>
       let taskOptions: Parameters<GetAllArtistAlbums>[1]
 
-      for (let next = offset; next < total; next += limit) {
-        taskOptions = { ...options, limit, offset: next }
+      for (let offset = limit; offset < total; offset += limit) {
+        taskOptions = { ...options, limit, offset }
         newTask = spotify.getArtistAlbums(artistId, taskOptions)
         tasks.push(newTask)
       }

@@ -7,8 +7,8 @@ const spotify = new SpotifyWebApi({
 })
 
 export const limiter = new Bottleneck({
-  maxConcurrent: 25,
-  minTime: 200,
+  maxConcurrent: 30,
+  minTime: 100,
 })
 
 export default spotify

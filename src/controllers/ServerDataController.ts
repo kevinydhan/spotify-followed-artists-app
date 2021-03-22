@@ -1,5 +1,10 @@
 import { getAllArtistAlbums, getAllFollowedArtists } from '@/modules/spotify'
 
+type SortAlbums = (
+  a: SpotifyApi.AlbumObjectSimplified,
+  b: SpotifyApi.AlbumObjectSimplified
+) => number
+
 class ServerDataController {
   getAllFollowedArtistsIds = async () => {
     const followedArtists = await getAllFollowedArtists()
@@ -8,15 +13,22 @@ class ServerDataController {
 
   getAllArtistsAlbums = async (artistIds: string[]) => {
     const tasks = artistIds
-      .slice(0, 5)
+      .slice(0, 10)
       .map((artistId) => getAllArtistAlbums(artistId))
     const responses = await Promise.all(tasks)
     return responses.flat()
   }
 
+  sortAlbums: SortAlbums = (a, b) => {
+    const dateA = new Date(a.release_date)
+    const dateB = new Date(b.release_date)
+    if (dateA === dateB) return 0
+    return dateA < dateB ? 1 : -1
+  }
+
   /**
    * @todo
-   * - Filter duplicate albums by name
+   * - Filter duplicate albums by name and/or id
    * - Sort albums from newest to oldest
    * - Work on caching strategies to reduce API calls to Spotify Web API
    */
@@ -24,12 +36,7 @@ class ServerDataController {
     const { getAllFollowedArtistsIds, getAllArtistsAlbums } = this
     const artistIds = await getAllFollowedArtistsIds()
     const albums = await getAllArtistsAlbums(artistIds)
-    return albums.sort((a, b) => {
-      const dateA = new Date(a.release_date)
-      const dateB = new Date(b.release_date)
-      if (dateA === dateB) return 0
-      return dateA < dateB ? 1 : -1
-    })
+    return albums.sort(this.sortAlbums)
   }
 }
 
