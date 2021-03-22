@@ -16,6 +16,7 @@
     "baseUrl": "src",
     "paths": {
       "@/types": ["@types"],
+      "@/components": ["components"],
       "@/controllers/*": ["controllers/*"],
       "@/graphql/*": ["graphql/*"],
       "@/modules/*": ["modules/*"]
