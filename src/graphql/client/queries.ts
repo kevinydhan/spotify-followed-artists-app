@@ -26,7 +26,7 @@ export const FOLLOWED_ARTISTS_ALBUMS = gql`
 `
 
 export interface GetAlbumTracksQueryData {
-  albumTracks: Pick<SpotifyApi.AlbumObjectSimplified, 'id' | 'name'>[]
+  albumTracks: Pick<SpotifyApi.AlbumObjectSimplified, 'id' | 'name' | 'uri'>[]
 }
 
 export interface GetAlbumTracksQueryVariables {
@@ -38,6 +38,7 @@ export const ALBUM_TRACKS = gql`
     albumTracks(albumId: $albumId) {
       id
       name
+      uri
     }
   }
 `

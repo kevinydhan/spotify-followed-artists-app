@@ -74,6 +74,12 @@ const options = {
          * - Getting user's followed artists
          */
         'user-follow-read',
+
+        /**
+         * This scope is required for:
+         * - Starting/pausing the user's playback
+         */
+        'user-modify-playback-state',
       ].join(' '),
     }),
   ],

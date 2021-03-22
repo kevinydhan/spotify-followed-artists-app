@@ -25,7 +25,9 @@ const IndexPage: NextPage<IndexPageProps> = () => {
   return (
     <div
       style={{
-        display: 'flex',
+        display: 'grid',
+        gridTemplateColumns: 'repeat(2, 1fr)',
+        width: '100%',
       }}
     >
       <div>
