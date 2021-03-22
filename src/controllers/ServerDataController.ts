@@ -14,6 +14,12 @@ class ServerDataController {
     return responses.flat()
   }
 
+  /**
+   * @todo
+   * - Filter duplicate albums by name
+   * - Sort albums from newest to oldest
+   * - Work on caching strategies to reduce API calls to Spotify Web API
+   */
   getAllFollowedArtistsAlbums = async () => {
     const { getAllFollowedArtistsIds, getAllArtistsAlbumsIds } = this
     const artistIds = await getAllFollowedArtistsIds()
