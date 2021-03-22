@@ -2,6 +2,9 @@ import { gql } from '@apollo/client'
 
 export interface FollowedArtistAlbum
   extends Pick<SpotifyApi.AlbumObjectSimplified, 'id' | 'name'> {
+  releaseDate: SpotifyApi.AlbumObjectSimplified['release_date']
+  totalTracks: SpotifyApi.AlbumObjectSimplified['total_tracks']
+  artists: Pick<SpotifyApi.ArtistObjectSimplified, 'name'>[]
   images: Omit<SpotifyApi.ImageObject, 'url'> & {
     src: SpotifyApi.ImageObject['url']
   }
@@ -16,6 +19,11 @@ export const FOLLOWED_ARTISTS_ALBUMS = gql`
     followedArtistsAlbums {
       id
       name
+      releaseDate: release_date
+      totalTracks: total_tracks
+      artists {
+        name
+      }
       images {
         src: url
         width

@@ -6,7 +6,7 @@ class ServerDataController {
     return followedArtists.map((artist) => artist.id)
   }
 
-  getAllArtistsAlbumsIds = async (artistIds: string[]) => {
+  getAllArtistsAlbums = async (artistIds: string[]) => {
     const tasks = artistIds
       .slice(0, 5)
       .map((artistId) => getAllArtistAlbums(artistId))
@@ -21,9 +21,15 @@ class ServerDataController {
    * - Work on caching strategies to reduce API calls to Spotify Web API
    */
   getAllFollowedArtistsAlbums = async () => {
-    const { getAllFollowedArtistsIds, getAllArtistsAlbumsIds } = this
+    const { getAllFollowedArtistsIds, getAllArtistsAlbums } = this
     const artistIds = await getAllFollowedArtistsIds()
-    return getAllArtistsAlbumsIds(artistIds)
+    const albums = await getAllArtistsAlbums(artistIds)
+    return albums.sort((a, b) => {
+      const dateA = new Date(a.release_date)
+      const dateB = new Date(b.release_date)
+      if (dateA === dateB) return 0
+      return dateA < dateB ? 1 : -1
+    })
   }
 }
 

@@ -123,6 +123,11 @@ export const ArtistAlbumSimplified = `
     \`"restrictions" : {"reason" : "market"}\`
     """
     restrictions: RestrictionsObject
+
+    """
+    The total number of tracks.
+    """
+    total_tracks: Int!
   }
 `
 

@@ -37,8 +37,11 @@ const IndexPage: NextPage<IndexPageProps> = () => {
             return (
               <li key={album.id}>
                 <button onClick={handleButtonClick(album.id)}>
-                  {album.name}
+                  {album.name} by{' '}
+                  {album.artists.map((artist) => artist.name).join(', ')}
+                  <br />({album.totalTracks} tracks)
                 </button>
+                <span>{album.releaseDate}</span>
               </li>
             )
           })}
