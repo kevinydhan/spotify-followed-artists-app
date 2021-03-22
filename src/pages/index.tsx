@@ -14,6 +14,7 @@ const IndexPage: NextPage<IndexPageProps> = () => {
   const { loading, data } = useQuery<QueryData>(query)
 
   if (loading) return <div>Loading...</div>
+
   return (
     <ul>
       {data.followedArtistsAlbums.map((album) => {

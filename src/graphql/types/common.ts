@@ -1,7 +1,7 @@
 /**
  * @see {SpotifyApi.ExternalUrlObject}
  */
-export const ExternalUrlsObject = `
+export const ExternalUrlObject = `
   type ExternalUrlObject {
     spotify: String!
   }

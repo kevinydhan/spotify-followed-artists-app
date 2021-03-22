@@ -1,7 +1,7 @@
 import type { IFieldResolver } from 'apollo-server-micro'
 
 import { getAllFollowedArtistsAlbums } from '@/controllers/ServerDataController'
-import spotify, { getAllAlbumTracks } from '@/modules/spotify'
+import { getAllAlbumTracks } from '@/modules/spotify'
 
 type FieldResolver<Arguments = Record<string, never>> = IFieldResolver<
   unknown,

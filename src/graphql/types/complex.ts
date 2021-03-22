@@ -125,3 +125,26 @@ export const ArtistAlbumSimplified = `
     restrictions: RestrictionsObject
   }
 `
+
+/**
+ * @todo
+ * - Add `linked_from` field.
+ *
+ * @see {SpotifyApi.TrackObjectSimplified}
+ */
+export const TrackObjectSimplified = `
+  type TrackObjectSimplified {
+    ${ContextObjectFields}
+
+    artists: [ArtistObjectSimplified!]!
+    available_markets: [String!]
+    disc_number: Int!
+    duration_ms: Int!
+    id: ID!
+    is_playable: Boolean!
+    restrictions: RestrictionsObject
+    name: String!
+    preview_url: String
+    track_number: Int!
+  }
+`

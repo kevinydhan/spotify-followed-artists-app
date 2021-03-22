@@ -5,7 +5,7 @@ import * as enums from './enums'
 export default `
   type Query {
     followedArtistsAlbums: [ArtistAlbumSimplified!]!
-    albumTracks(albumId: String!): [String!]!
+    albumTracks(albumId: String!): [TrackObjectSimplified!]!
   }
 
   ${Object.values(commonTypes)}
