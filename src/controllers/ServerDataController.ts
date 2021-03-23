@@ -13,7 +13,7 @@ class ServerDataController {
 
   getAllArtistsAlbums = async (artistIds: string[]) => {
     const tasks = artistIds
-      .slice(0, 10)
+      .slice(0, 20)
       .map((artistId) => getAllArtistAlbums(artistId))
     const responses = await Promise.all(tasks)
     return responses.flat()
