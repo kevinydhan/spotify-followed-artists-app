@@ -2,6 +2,7 @@ import type { FollowedArtistAlbum } from '@/types'
 
 export interface AlbumListProps {
   albums?: FollowedArtistAlbum[]
+  openTrackDrawer: (albumId: string) => void
 }
 
 export type JoinArtistNames = (

@@ -11,7 +11,10 @@ import type { FunctionComponent } from 'react'
 
 import type { AlbumListProps, JoinArtistNames } from './AlbumList.d'
 
-const AlbumList: FunctionComponent<AlbumListProps> = ({ albums }) => (
+const AlbumList: FunctionComponent<AlbumListProps> = ({
+  albums,
+  openTrackDrawer,
+}) => (
   <VStack
     as="ul"
     listStyleType="none"
@@ -20,7 +23,13 @@ const AlbumList: FunctionComponent<AlbumListProps> = ({ albums }) => (
     divider={<StackDivider />}
   >
     {albums.map((album) => (
-      <Flex as="li" key={album.id} align="center" paddingX="2">
+      <Flex
+        as="li"
+        key={album.id}
+        align="center"
+        paddingX="2"
+        onClick={openTrackDrawer(album.id)}
+      >
         <Image
           {...album.images[0]}
           boxSize="80px"
