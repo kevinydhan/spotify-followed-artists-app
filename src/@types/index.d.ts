@@ -1,5 +1,8 @@
 export * from './environment'
 
+// GraphQL-related types
+export * from './graphql/client'
+
 // NextAuth-related types
 export * from './next-auth/accounts'
 export * from './next-auth/callbacks'

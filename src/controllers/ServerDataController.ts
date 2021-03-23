@@ -28,7 +28,7 @@ class ServerDataController {
 
   /**
    * @todo
-   * - Filter duplicate albums by name and/or id
+   * - Filter duplicate albums by name
    * - Sort albums from newest to oldest
    * - Work on caching strategies to reduce API calls to Spotify Web API
    */
