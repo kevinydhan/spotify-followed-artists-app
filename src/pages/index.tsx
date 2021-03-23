@@ -1,4 +1,5 @@
 import { useQuery } from '@apollo/client'
+import { Heading } from '@chakra-ui/react'
 import type { NextPage } from 'next'
 import React, { useState } from 'react'
 
@@ -14,32 +15,32 @@ interface IndexPageProps {
 
 const IndexPage: NextPage<IndexPageProps> = () => {
   const { loading, data } = useQuery<QueryData>(query)
-  const [displayedAlbumId, setDisplayedAlbumId] = useState('')
+  // const [displayedAlbumId, setDisplayedAlbumId] = useState('')
 
-  const handleButtonClick = (albumId: string) => () => {
-    if (displayedAlbumId !== albumId) setDisplayedAlbumId(albumId)
-  }
+  // const handleButtonClick = (albumId: string) => () => {
+  //   if (displayedAlbumId !== albumId) setDisplayedAlbumId(albumId)
+  // }
 
   if (loading) return <div>Loading...</div>
 
   return (
-    <div
-      style={
-        {
-          // display: 'grid',
-          // gridTemplateColumns: 'repeat(2, 1fr)',
-          // width: '100%',
-        }
-      }
-    >
+    <div>
       <div>
-        <h1>New Releases</h1>
+        <Heading
+          as="h1"
+          lineHeight="1"
+          paddingX="2"
+          marginTop="4"
+          marginBottom="8"
+        >
+          New Releases from your followed artists
+        </Heading>
         <AlbumList albums={data.followedArtistsAlbums} />
       </div>
-      <div>
+      {/* <div>
         <h2>Album Tracks</h2>
         {displayedAlbumId && <AlbumTrackTable albumId={displayedAlbumId} />}
-      </div>
+      </div> */}
     </div>
   )
 }
