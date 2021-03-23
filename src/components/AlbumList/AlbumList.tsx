@@ -31,7 +31,7 @@ const AlbumList: FunctionComponent<AlbumListProps> = ({ albums }) => (
           <Heading as="h2" size="sm" noOfLines={[1]}>
             {album.name}
           </Heading>
-          <Text size="sm" marginBottom="2">
+          <Text size="sm" marginBottom="1">
             by {joinArtistNames(album.artists)}
           </Text>
           <Text fontSize="14px" color="gray.500">

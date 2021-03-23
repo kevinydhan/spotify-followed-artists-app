@@ -14,7 +14,7 @@ const AlbumListScreen: FunctionComponent = () => {
 
   if (loading) return <LoadingScreen />
   return (
-    <Box>
+    <Box marginBottom="4">
       <Heading
         as="h1"
         lineHeight="1"
