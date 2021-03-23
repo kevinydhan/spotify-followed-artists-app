@@ -1,48 +1,24 @@
-import { useQuery } from '@apollo/client'
-import { Heading } from '@chakra-ui/react'
-import type { NextPage } from 'next'
-import React, { useState } from 'react'
+import type { GetServerSideProps, NextPage } from 'next'
+import { getSession } from 'next-auth/client'
 
-import { AlbumList, AlbumTrackTable } from '@/components'
-import {
-  FOLLOWED_ARTISTS_ALBUMS as query,
-  GetFollowedArtistsAlbumsQueryData as QueryData,
-} from '@/graphql/client'
-
+import { AlbumListScreen, SignInScreen } from '@/views'
 interface IndexPageProps {
-  fill?: string
+  isLoggedIn: boolean
 }
 
-const IndexPage: NextPage<IndexPageProps> = () => {
-  const { loading, data } = useQuery<QueryData>(query)
-  // const [displayedAlbumId, setDisplayedAlbumId] = useState('')
+const IndexPage: NextPage<IndexPageProps> = ({ isLoggedIn }) => {
+  if (!isLoggedIn) return <SignInScreen />
+  return <AlbumListScreen />
+}
 
-  // const handleButtonClick = (albumId: string) => () => {
-  //   if (displayedAlbumId !== albumId) setDisplayedAlbumId(albumId)
-  // }
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const session = await getSession(context)
 
-  if (loading) return <div>Loading...</div>
-
-  return (
-    <div>
-      <div>
-        <Heading
-          as="h1"
-          lineHeight="1"
-          paddingX="2"
-          marginTop="4"
-          marginBottom="8"
-        >
-          New Releases from your followed artists
-        </Heading>
-        <AlbumList albums={data.followedArtistsAlbums} />
-      </div>
-      {/* <div>
-        <h2>Album Tracks</h2>
-        {displayedAlbumId && <AlbumTrackTable albumId={displayedAlbumId} />}
-      </div> */}
-    </div>
-  )
+  return {
+    props: {
+      isLoggedIn: !!session,
+    },
+  }
 }
 
 export default IndexPage

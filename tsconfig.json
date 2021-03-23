@@ -19,7 +19,8 @@
       "@/components": ["components"],
       "@/controllers/*": ["controllers/*"],
       "@/graphql/*": ["graphql/*"],
-      "@/modules/*": ["modules/*"]
+      "@/modules/*": ["modules/*"],
+      "@/views": ["views"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

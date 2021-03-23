@@ -1,7 +1,7 @@
 import type { FollowedArtistAlbum } from '@/types'
 
 export interface AlbumListProps {
-  albums: FollowedArtistAlbum[]
+  albums?: FollowedArtistAlbum[]
 }
 
 export type JoinArtistNames = (

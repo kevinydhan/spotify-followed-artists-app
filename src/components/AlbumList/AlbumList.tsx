@@ -7,7 +7,7 @@ import {
   Text,
   VStack,
 } from '@chakra-ui/react'
-import React, { FunctionComponent } from 'react'
+import type { FunctionComponent } from 'react'
 
 import type { AlbumListProps, JoinArtistNames } from './AlbumList.d'
 
