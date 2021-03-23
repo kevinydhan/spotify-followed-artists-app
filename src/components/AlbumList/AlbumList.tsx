@@ -1,24 +1,42 @@
-import { Box, Flex, Image, Spacer, Text, VStack } from '@chakra-ui/react'
+import {
+  Box,
+  Flex,
+  Heading,
+  Image,
+  StackDivider,
+  Text,
+  VStack,
+} from '@chakra-ui/react'
 import React, { FunctionComponent } from 'react'
 
 import type { AlbumListProps, JoinArtistNames } from './AlbumList.d'
 
 const AlbumList: FunctionComponent<AlbumListProps> = ({ albums }) => (
-  <VStack as="ul" listStyleType="none" align="left">
+  <VStack
+    as="ul"
+    listStyleType="none"
+    align="left"
+    spacing="4"
+    divider={<StackDivider />}
+  >
     {albums.map((album) => (
-      <Flex as="li" key={album.id} align="center">
+      <Flex as="li" key={album.id} align="center" paddingX="2">
         <Image
           {...album.images[0]}
-          boxSize="64px"
-          fallbackSrc="https://via.placeholder.com/64"
+          boxSize="80px"
+          fallbackSrc="https://via.placeholder.com/80"
+          marginRight="4"
         />
         <Box>
-          <Text>{album.name}</Text>
-          <Text>by {joinArtistNames(album.artists)}</Text>
-          <Text>
+          <Heading as="h2" size="sm" noOfLines={[1]}>
+            {album.name}
+          </Heading>
+          <Text size="sm" marginBottom="2">
+            by {joinArtistNames(album.artists)}
+          </Text>
+          <Text fontSize="14px" color="gray.500">
             {album.totalTracks} {album.totalTracks > 1 ? 'tracks' : 'track'}
           </Text>
-          <Text>{album.releaseDate}</Text>
         </Box>
       </Flex>
     ))}
