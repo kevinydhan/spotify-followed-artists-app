@@ -7,11 +7,12 @@ import {
   FOLLOWED_ARTISTS_ALBUMS as query,
   GetFollowedArtistsAlbumsQueryData as QueryData,
 } from '@/graphql/client'
+import { LoadingScreen } from '@/views'
 
 const AlbumListScreen: FunctionComponent = () => {
   const { loading, data } = useQuery<QueryData>(query)
 
-  if (loading) return <div>Loading...</div>
+  if (loading) return <LoadingScreen />
   return (
     <Box>
       <Heading
