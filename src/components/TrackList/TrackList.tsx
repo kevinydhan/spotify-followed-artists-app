@@ -1,15 +1,6 @@
 import { useQuery } from '@apollo/client'
-import {
-  Box,
-  DrawerBody,
-  Flex,
-  Heading,
-  Image,
-  StackDivider,
-  Text,
-  VStack,
-} from '@chakra-ui/react'
-import { FunctionComponent, useEffect } from 'react'
+import { Box, StackDivider, Text, VStack } from '@chakra-ui/react'
+import type { FunctionComponent } from 'react'
 
 import {
   ALBUM_TRACKS,
@@ -27,6 +18,14 @@ const TrackList: FunctionComponent<TrackListProps> = ({ albumId }) => {
   })
 
   if (loading) return <p>Loading</p>
+
+  const playSong = (trackUri: string) => async () => {
+    try {
+      await fetch(`/api/playback/queue/${trackUri}`)
+      await fetch('/api/playback/skip')
+    } catch {}
+  }
+
   return (
     <VStack
       as="ol"
@@ -37,7 +36,9 @@ const TrackList: FunctionComponent<TrackListProps> = ({ albumId }) => {
       divider={<StackDivider />}
     >
       {data.albumTracks.map((track) => (
-        <li key={track.id}>{track.name}</li>
+        <Box as="li" key={track.id} onClick={playSong(track.uri)}>
+          <Text noOfLines={[1]}>{track.name}</Text>
+        </Box>
       ))}
     </VStack>
   )
